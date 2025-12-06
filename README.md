@@ -8,7 +8,15 @@ A minimalist, high-performance Version Control System designed for **Artists, Mu
 - **List:** Shows a list of all saved versions with their IDs and comments.
 - **Split:** Creates a **new folder** containing the project exactly as it looked at a specified version.
 
-## Tips
+```md
+## ProjectWorkspace
+- dir: DirectoryPath
+- versions: List(ProjectVersion)
 
-- **Fast-Save:** Mtime Cache.
-- **Atomic Writes:** Write to temp files first, then rename.
+## ProjectVersion
+- files: HashMap(Path, Hash)
+- comment: Optional(Text)
+
+## FileStore
+- dir: DirectoryPath
+```
