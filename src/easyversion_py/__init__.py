@@ -1,13 +1,8 @@
 from .file import FileStore
-import os 
+from .project import ProjectVersion
 
-__all__ = ["FileStore"]
+__all__ = ["FileStore", "ProjectVersion"]
 
 
 def main() -> None:
-    for root, dirs, files in os.walk("/home/wannes/Documenten/personal/coding/python/easyversion_py/src/"):
-        print(f"Root: {root}")
-        print(f"Dirs: {dirs}")
-        print(f"Files: {files}")
-    
-        
+    print("Hello from easyversion_py!")
