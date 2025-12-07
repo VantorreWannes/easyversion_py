@@ -7,7 +7,9 @@ authors = [
     { name = "Wannes Vantorre", email = "vantorrewannes@gmail.com" }
 ]
 requires-python = ">=3.14"
-dependencies = []
+dependencies = [
+    "cattrs>=25.3.0",
+]
 
 [project.scripts]
 easyversion_py = "easyversion_py:main"

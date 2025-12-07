@@ -1,8 +1,10 @@
+from typing import LiteralString
+
+
 from pathlib import Path
 from pytest import fixture
 
-from easyversion_py import FileStore
-from easyversion_py.project.version import ProjectVersion
+from easyversion_py import FileStore, ProjectVersion, ProjectWorkspace
 
 
 @fixture
@@ -18,8 +20,18 @@ def file_store(tmp_path: Path) -> FileStore:
 
 
 @fixture
-def project_version(workspace_dir: Path) -> ProjectVersion:
-    return ProjectVersion(workspace_dir, None)
+def project_version() -> ProjectVersion:
+    return ProjectVersion(None)
+
+
+@fixture
+def project_workspace(workspace_dir: Path, file_store: FileStore) -> ProjectWorkspace:
+    return ProjectWorkspace(workspace_dir, file_store)
+
+
+@fixture
+def json_data() -> LiteralString:
+    return '{"dir": "/tmp/pytest-of-wannes/pytest-61/test_to_json0/workspace", "file_store": {"dir": "/tmp/pytest-of-wannes/pytest-61/test_to_json0/file_store"}, "versions": [{"comment": "Hello World!", "files": {"temp/temp.txt": 6486659796661480009679813770337136512253847759462969237328633784501934220200}}]}'
 
 
 @fixture
