@@ -1,4 +1,4 @@
-from easyversion_py import FileStore
+from easyversion import FileStore
 
 
 def test_init(tmp_path) -> None:

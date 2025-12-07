@@ -3,8 +3,8 @@ import json
 from pathlib import Path
 
 from cattrs import structure, unstructure
-from easyversion_py.file import FileStore
-from easyversion_py.project.version import ProjectVersion
+from easyversion.file import FileStore
+from easyversion.project.version import ProjectVersion
 
 
 @dataclass

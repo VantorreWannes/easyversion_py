@@ -1,6 +1,6 @@
 from pathlib import Path
-from easyversion_py import FileStore
-from easyversion_py.project.workspace import ProjectWorkspace
+from easyversion import FileStore
+from easyversion.project.workspace import ProjectWorkspace
 
 
 def test_init(workspace_dir: Path, file_store: FileStore) -> None:

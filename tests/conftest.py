@@ -4,7 +4,7 @@ from typing import LiteralString
 from pathlib import Path
 from pytest import fixture
 
-from easyversion_py import FileStore, ProjectVersion, ProjectWorkspace
+from easyversion import FileStore, ProjectVersion, ProjectWorkspace
 
 
 @fixture

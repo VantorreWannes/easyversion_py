@@ -1,6 +1,6 @@
 from pathlib import Path
-from easyversion_py import FileStore
-from easyversion_py.project.version import ProjectVersion
+from easyversion import FileStore
+from easyversion.project.version import ProjectVersion
 
 
 def test_init():
