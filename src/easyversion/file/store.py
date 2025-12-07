@@ -1,6 +1,7 @@
 import hashlib
 from dataclasses import dataclass, field
 from pathlib import Path
+import zlib
 
 
 @dataclass
@@ -22,7 +23,9 @@ class FileStore:
 
         save_path: Path = self._path(file_id)
 
-        save_path.write_bytes(data)
+        compressed_data = zlib.compress(data)
+
+        save_path.write_bytes(compressed_data)
 
         return file_id
 

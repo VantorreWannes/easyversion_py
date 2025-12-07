@@ -1,7 +1,9 @@
 from dataclasses import dataclass, field
 from pathlib import Path
+import zlib
 
-from easyversion_py.file import FileStore
+
+from easyversion.file import FileStore
 
 
 @dataclass
@@ -27,7 +29,8 @@ class ProjectVersion:
         for rel, fid in self.files.items():
             abs_path = root_dir / rel
             abs_path.parent.mkdir(parents=True, exist_ok=True)
-            abs_path.write_bytes(file_store.get(fid))
+            data = file_store.get(fid)
+            abs_path.write_bytes(zlib.decompress(data))
 
     def clone(self) -> ProjectVersion:
         return ProjectVersion(self.comment, self.files.copy())
