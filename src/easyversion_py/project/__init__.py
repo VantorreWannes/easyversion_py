@@ -1,3 +1,4 @@
 from .version import ProjectVersion
+from .workspace import ProjectWorkspace
 
-__all__ = ["ProjectVersion"]
+__all__ = ["ProjectVersion", "ProjectWorkspace"]

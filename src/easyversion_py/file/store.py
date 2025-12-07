@@ -1,12 +1,13 @@
-from __future__ import annotations
-
-from pathlib import Path
 import hashlib
+from dataclasses import dataclass, field
+from pathlib import Path
 
 
+@dataclass
 class FileStore:
-    def __init__(self, dir: Path) -> None:
-        self.dir: Path = Path(dir)
+    dir: Path = field()
+
+    def __post_init__(self) -> None:
         self.dir.mkdir(parents=True, exist_ok=True)
 
     def _path(self, file_id: int) -> Path:
