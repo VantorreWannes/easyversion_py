@@ -55,8 +55,8 @@ class ProjectWorkspace:
             )
             raise IndexError()
 
-        if version_index == 0:
-            logger.error("Requested version_index 0 is invalid (1..N expected)")
+        if version_index <= 0:
+            logger.error("Requested version_index cannot be lower than 1")
             raise IndexError()
 
         versions = self.versions[:version_index]
