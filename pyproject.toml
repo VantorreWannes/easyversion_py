@@ -1,6 +1,6 @@
 [project]
 name = "easyversion"
-version = "0.1.0"
+version = "0.2.0"
 description = "Minimal, fast folder snapshots. Save, list, and materialize versions into new folders. Non-destructive, content-addressed store."
 readme = "README.md"
 authors = [
