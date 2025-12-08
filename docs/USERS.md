@@ -154,4 +154,4 @@ chmod +x ./ev
 
 ## Where to go next
 
-- Technical docs for developers (building from source, running tests): see [DEVELOPERS.md](docs/DEVELOPERS.md)
+- Technical docs for developers (building from source, running tests): see [DEVELOPERS.md](DEVELOPERS.md)
