@@ -1,9 +1,6 @@
-from typing import Literal, LiteralString
-
-
 from pathlib import Path
 import zlib
-from pytest import fixture
+from pytest import TempPathFactory, fixture
 
 from easyversion import FileStore, ProjectVersion, ProjectWorkspace
 
@@ -16,8 +13,9 @@ def workspace_dir(tmp_path: Path) -> Path:
 
 
 @fixture
-def file_store(tmp_path: Path, data: bytes) -> FileStore:
-    file_store = FileStore(tmp_path / "file_store")
+def file_store(tmp_path_factory: TempPathFactory, data: bytes) -> FileStore:
+    fs_base = tmp_path_factory.mktemp("file_store_base")
+    file_store = FileStore(fs_base / "file_store")
     file_store.add(data)
     return file_store
 

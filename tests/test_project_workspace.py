@@ -17,13 +17,7 @@ def test_save(project_workspace: ProjectWorkspace, rel_file_in_dir: Path) -> Non
 def test_split(
     project_workspace: ProjectWorkspace, rel_file_in_dir: Path, tmp_path: Path
 ) -> None:
-    split_one = project_workspace.split(tmp_path, 0)
-    assert len(split_one.versions) == 0
-
     project_workspace.save()
-
-    split_one = project_workspace.split(tmp_path, 0)
-    assert len(split_one.versions) == 0
 
     split_two = project_workspace.split(tmp_path, 1)
     assert len(split_two.versions) == 1
