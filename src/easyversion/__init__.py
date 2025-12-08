@@ -7,8 +7,6 @@ from platformdirs import user_config_path, user_data_path
 from easyversion.file import FileStore
 from easyversion.project import ProjectWorkspace, ProjectVersion
 
-logger = logging.getLogger(__name__)
-
 __all__: list[str] = ["FileStore", "ProjectVersion", "ProjectWorkspace"]
 
 APPNAME = "easyversion"
@@ -16,6 +14,11 @@ APPAUTHOR = "wannesvantorre"
 CONFIG_DIR = user_config_path(APPNAME, APPAUTHOR)
 DATA_DIR = user_data_path(APPNAME, APPAUTHOR)
 STORE_DIR = DATA_DIR / "file_store"
+LOG_FILE = CONFIG_DIR / "out.log"
+
+logger = logging.getLogger(__name__)
+logger.addHandler(logging.StreamHandler())
+logger.addHandler(logging.FileHandler(LOG_FILE))
 
 
 def parse_loglevel(value: str) -> int:
