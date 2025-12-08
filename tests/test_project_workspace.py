@@ -25,8 +25,8 @@ def test_split(
     split_one = project_workspace.split(tmp_path, 0)
     assert len(split_one.versions) == 0
 
-    split_one = project_workspace.split(tmp_path, 1)
-    assert len(split_one.versions) == 1
+    split_two = project_workspace.split(tmp_path, 1)
+    assert len(split_two.versions) == 1
 
 
 def test_to_json(project_workspace: ProjectWorkspace, rel_file_in_dir: Path) -> None:

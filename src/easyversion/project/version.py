@@ -1,4 +1,5 @@
 from dataclasses import dataclass, field
+from operator import truediv
 import os
 from pathlib import Path
 import shutil
@@ -26,8 +27,6 @@ class ProjectVersion:
             self.add_file(file_store, root_dir, p.relative_to(root_dir))
 
     def restore(self, root_dir: Path, file_store: FileStore) -> None:
-        if root_dir.exists():
-            shutil.rmtree(root_dir)
         for rel, fid in self.files.items():
             abs_path = root_dir / rel
             abs_path.parent.mkdir(parents=True, exist_ok=True)
