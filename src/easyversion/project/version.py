@@ -32,7 +32,7 @@ class ProjectVersion:
             abs_path = root_dir / rel
             abs_path.parent.mkdir(parents=True, exist_ok=True)
             data = file_store.get(fid)
-            abs_path.write_bytes(zlib.decompress(data))
+            abs_path.write_bytes(data)
 
     def clone(self) -> ProjectVersion:
         return ProjectVersion(self.comment, self.files.copy())

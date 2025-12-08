@@ -1,7 +1,8 @@
-from typing import LiteralString
+from typing import Literal, LiteralString
 
 
 from pathlib import Path
+import zlib
 from pytest import fixture
 
 from easyversion import FileStore, ProjectVersion, ProjectWorkspace
@@ -15,8 +16,10 @@ def workspace_dir(tmp_path: Path) -> Path:
 
 
 @fixture
-def file_store(tmp_path: Path) -> FileStore:
-    return FileStore(tmp_path / "file_store")
+def file_store(tmp_path: Path, data: bytes) -> FileStore:
+    file_store = FileStore(tmp_path / "file_store")
+    file_store.add(data)
+    return file_store
 
 
 @fixture
@@ -30,13 +33,18 @@ def project_workspace(workspace_dir: Path, file_store: FileStore) -> ProjectWork
 
 
 @fixture
-def json_data() -> LiteralString:
-    return '{"dir": "/tmp/pytest-of-wannes/pytest-61/test_to_json0/workspace", "file_store": {"dir": "/tmp/pytest-of-wannes/pytest-61/test_to_json0/file_store"}, "versions": [{"comment": "Hello World!", "files": {"temp/temp.txt": 6486659796661480009679813770337136512253847759462969237328633784501934220200}}]}'
+def data() -> bytes:
+    return b"Hello world!"
 
 
 @fixture
-def data() -> bytes:
-    return b"Hello world!"
+def compressed_data(data: bytes) -> bytes:
+    return zlib.compress(data)
+
+
+@fixture
+def file_id() -> int:
+    return 28827940057343428552633618170441716678452632871101695289607250431293174006633
 
 
 @fixture
