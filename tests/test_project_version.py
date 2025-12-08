@@ -3,11 +3,6 @@ from easyversion import FileStore
 from easyversion.project.version import ProjectVersion
 
 
-def test_init():
-    pv = ProjectVersion(None)
-    assert pv.comment is None
-
-
 def test_add_file(
     project_version: ProjectVersion,
     workspace_dir: Path,

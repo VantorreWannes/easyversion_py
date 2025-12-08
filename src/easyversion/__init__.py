@@ -56,7 +56,7 @@ def cmd_list() -> None:
             print(f"{idx}. {cmt}")
 
 
-def cmd_split(dest_dir: Path, version: int) -> None:
+def cmd_split(dest_dir: Path, version: int | None) -> None:
     workspace: ProjectWorkspace = open_workspace(Path.cwd())
     new_ws = workspace.split(dest_dir, version)
     save_workspace(new_ws)
@@ -101,8 +101,8 @@ def main() -> None:
         "-v",
         "--version",
         type=int,
-        default=-1,
-        help="Version index (1..N). Defaults to latest",
+        default=None,
+        help="Version index (0..N). Defaults to latest",
     )
 
     clean_parser = subparsers.add_parser("clean", help="Cleanup EV in this folder")

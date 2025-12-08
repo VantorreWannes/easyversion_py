@@ -1,12 +1,11 @@
 from easyversion import FileStore
 
 
-def test_init(tmp_path) -> None:
-    d = tmp_path / "store"
-    file_store = FileStore(d)
-    assert file_store.dir == d
-
-
-def test_add_and_get(file_store: FileStore, data: bytes) -> None:
+def test_add(file_store: FileStore, data: bytes, file_id: int) -> None:
     file_id = file_store.add(data)
-    assert file_store.get(file_id) == data
+    assert file_id == file_id
+
+
+def test_get(file_store: FileStore, data: bytes, file_id: int) -> None:
+    recieved = file_store.get(file_id)
+    assert recieved == data

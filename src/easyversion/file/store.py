@@ -18,13 +18,17 @@ class FileStore:
         digest = hashlib.blake2b(data, digest_size=32).digest()
         return int.from_bytes(digest, byteorder="big", signed=False)
 
+    def _compress(self, data: bytes) -> bytes:
+        return zlib.compress(data)
+
+    def _decompress(self, data: bytes) -> bytes:
+        return zlib.decompress(data)
+
     def add(self, data: bytes) -> int:
         file_id: int = self._blake_hash(data)
-
         save_path: Path = self._path(file_id)
 
-        compressed_data = zlib.compress(data)
-
+        compressed_data = self._compress(data)
         save_path.write_bytes(compressed_data)
 
         return file_id
@@ -32,4 +36,4 @@ class FileStore:
     def get(self, file_id: int) -> bytes:
         save_path = self._path(file_id)
         with open(save_path, "rb") as f:
-            return f.read()
+            return self._decompress(f.read())

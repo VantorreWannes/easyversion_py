@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 import json
 from pathlib import Path
+import shutil
 
 from cattrs import structure, unstructure
 from easyversion.file import FileStore
@@ -24,19 +25,24 @@ class ProjectWorkspace:
     def split(
         self, new_dir: Path, version_index: int | None = None
     ) -> ProjectWorkspace:
-        if not self.versions:
-            return ProjectWorkspace(new_dir, self.file_store, [])
+        version_index = len(self.versions) if version_index is None else version_index
 
-        if version_index == -1:
-            version_slice = self.versions
-        else:
-            version_slice = self.versions[:version_index]
+        if version_index > len(self.versions):
+            raise IndexError()
 
-        versions: list[ProjectVersion] = [v.clone() for v in version_slice]
+        if version_index == 0:
+            raise IndexError()
 
-        last_project_version: ProjectVersion = versions[-1]
+        versions = self.versions[:version_index]
 
-        last_project_version.restore(new_dir, self.file_store)
+        if new_dir.exists():
+            shutil.rmtree(new_dir)
+
+        new_dir.mkdir(parents=True, exist_ok=True)
+
+        if versions:
+            last_version = versions[-1]
+            last_version.restore(new_dir, self.file_store)
 
         return ProjectWorkspace(new_dir, self.file_store, versions)
 
