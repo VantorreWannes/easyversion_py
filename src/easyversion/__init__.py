@@ -62,6 +62,11 @@ def cmd_split(dest_dir: Path, version: int) -> None:
     save_workspace(new_ws)
 
 
+def cmd_clean() -> None:
+    config_file = config_file_path(Path.cwd())
+    config_file.unlink(missing_ok=True)
+
+
 def resolve_command(args: argparse.Namespace):
     match args.command:
         case "save":
@@ -70,6 +75,8 @@ def resolve_command(args: argparse.Namespace):
             cmd_list()
         case "split":
             cmd_split(args.dir.resolve(), args.version)
+        case "clean":
+            cmd_clean()
 
 
 def main() -> None:
@@ -97,6 +104,8 @@ def main() -> None:
         default=-1,
         help="Version index (1..N). Defaults to latest",
     )
+
+    clean_parser = subparsers.add_parser("clean", help="Cleanup EV in this folder")
 
     args = main_parser.parse_args()
     resolve_command(args)

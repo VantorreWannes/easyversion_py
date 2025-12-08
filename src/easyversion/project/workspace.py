@@ -24,6 +24,9 @@ class ProjectWorkspace:
     def split(
         self, new_dir: Path, version_index: int | None = None
     ) -> ProjectWorkspace:
+        if not self.versions:
+            return ProjectWorkspace(new_dir, self.file_store, [])
+
         if version_index == -1:
             version_slice = self.versions
         else:
