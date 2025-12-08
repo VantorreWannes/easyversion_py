@@ -22,9 +22,7 @@ class ProjectVersion:
         self, file_store: FileStore, root_dir: Path, sub_dir_path: Path | None = None
     ) -> None:
         base = root_dir / sub_dir_path if sub_dir_path is not None else root_dir
-        for p in sorted(
-            pp for pp in base.rglob("*") if pp.is_file()
-        ):
+        for p in sorted(pp for pp in base.rglob("*") if pp.is_file()):
             self.add_file(file_store, root_dir, p.relative_to(root_dir))
 
     def restore(self, root_dir: Path, file_store: FileStore) -> None:
